@@ -1,5 +1,5 @@
 {
-  "key_file": "packer/files/key.json",
+  "key_file": "key.json",
   "folder_id": "b1gvbuopv4jh7e36atvs",
   "src_image_family": "ubuntu-1804-lts",
   "zone": "ru-central1-a",
