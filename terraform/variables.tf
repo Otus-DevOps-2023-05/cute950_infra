@@ -23,7 +23,7 @@ variable "subnet_id" {
 variable "token" {
   description = "token"
 }
-variable "count" {
+variable "instances_count" {
   description = "count of instances"
   default = 1
 }

@@ -1,5 +1,5 @@
 resource "yandex_lb_target_group" "reddit_app_group" {
-  count = var.count
+  count = var.instances_count
   name = "reddit-app-group-${count.index}"
   region_id = "ru-central1"
   folder_id = var.folder_id
