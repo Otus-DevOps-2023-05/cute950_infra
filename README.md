@@ -1,7 +1,8 @@
 # cute950_infra
 cute950 Infra repository
 
-## Способ подключения к someinternalhost в одну команду
+## ДЗ "Знакомство с облачной инфраструктурой. Yandex.Cloud"
+### Способ подключения к someinternalhost в одну команду
 ```sh
 $ ssh -J appuser@<bastion_IP> appuser@<someinternalhost_IP>
 ```
@@ -30,11 +31,16 @@ Host someinternalhost
 $ ssh someinternalhost
 ```
 
-### Данные для подключения
+Данные для подключения:
 bastion_IP = 158.160.35.233
 someinternalhost_IP = 10.128.0.19
 
-### Дз "Деплой тестового приложения"
+## ДЗ "Сборка образов VM при помощи Packer"
+- Параметризация шаблона
+- Построение bake-образа --> по шаблону immutable.json в директории packer
+- Создан скрипт create-reddit-vm.sh в директории config-scripts, который создает ВМ с помощью Yandex.Cloud CLI.
+
+## Дз "Деплой тестового приложения"
 Данные для подключения:
 testapp_IP = 51.250.75.115
 testapp_port = 9292

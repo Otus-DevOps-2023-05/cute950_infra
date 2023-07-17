@@ -1,0 +1,34 @@
+{
+    "builders": [
+        {
+            "type": "yandex",
+            "service_account_key_file": "{{user `key_file`}}",
+            "folder_id": "{{user `folder_id`}}",
+            "source_image_family": "{{user `src_image_family`}}",
+            "image_name": "{{user `vm_name`}}-{{timestamp}}",
+            "image_family": "{{user `vm_name`}}",
+            "ssh_username": "ubuntu",
+            "platform_id": "standard-v1",
+            "use_ipv4_nat": "true",
+            "disk_name": "{{user `vm_name`}}",
+            "zone": "{{user `zone`}}"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "scripts/install_ruby.sh",
+            "execute_command": "sudo {{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/install_mongodb.sh",
+            "execute_command": "sudo {{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "files/install_app.sh",
+            "execute_command": "sudo {{.Path}}"
+        }
+    ]
+}
