@@ -1,0 +1,11 @@
+cloud_id         = "cloud_id"
+folder_id        = "folder_id"
+zone             = "ru-central1-a"
+image_id         = "image_id"
+private_key_path = "~/.ssh/appuser"
+public_key_path  = "~/.ssh/appuser.pub"
+subnet_id        = "subnet_id"
+token            = "token"
+instances_count  = 1
+app_disk_image   = "app_disk_image"
+db_disk_image    = "db_disk_image"

@@ -6,7 +6,7 @@ variable "folder_id" {
 }
 variable "zone" {
   description = "zone"
-  default = "ru-central1-a"
+  default     = "ru-central1-a"
 }
 variable "private_key_path" {
   description = "private_key_path"
@@ -25,5 +25,15 @@ variable "token" {
 }
 variable "instances_count" {
   description = "count of instances"
-  default = 1
+  default     = 1
+}
+
+variable "app_disk_image" {
+  description = "Disk image for reddit app"
+  default     = "reddit-app-base"
+}
+
+variable "db_disk_image" {
+  description = "Disk image for reddit db"
+  default     = "reddit-db-base"
 }
