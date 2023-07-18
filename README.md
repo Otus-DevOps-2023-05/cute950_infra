@@ -35,6 +35,11 @@ $ ssh someinternalhost
 bastion_IP = 158.160.35.233
 someinternalhost_IP = 10.128.0.19
 
+## ДЗ "Сборка образов VM при помощи Packer"
+- Параметризация шаблона
+- Построение bake-образа --> по шаблону immutable.json в директории packer
+- Создан скрипт create-reddit-vm.sh в директории config-scripts, который создает ВМ с помощью Yandex.Cloud CLI.
+
 ## Дз "Деплой тестового приложения"
 Данные для подключения:
 testapp_IP = 51.250.75.115
@@ -45,7 +50,24 @@ testapp_port = 9292
  $ sh ./startup.sh
  ```
 
-## ДЗ "Сборка образов VM при помощи Packer"
-- Параметризация шаблона
-- Построение bake-образа --> по шаблону immutable.json в директории packer
-- Создан скрипт create-reddit-vm.sh в директории config-scripts, который создает ВМ с помощью Yandex.Cloud CLI.
+### ДЗ "Практика IaC с использованием Terraform"
+при команде terraform apply возникла ошибка:
+Error: Error while requesting API to create instance: server-request-id = 76bc9c1a-7e5f-b439-b97e-d497fe004f4b server-trace-id = b01c8f65b967fb64:ca4dd494e5960766:b01c8f65b967fb64:1 client-request-id = 89def97d-5027-43c9-b77d-9b96e0ee3ef6 client-trace-id = 70fba088-4a74-4cb0-9ab7-47d78b9fb330 rpc error: code = InvalidArgument desc = the specified number of cores is not available on platform "standard-v1"; allowed core number: 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 32
+
+поправила ее путем изменения кол-ва ядер cores  = 2 в resources в main.tf
+
+name так же изменила на reddit-app-terraform, так как в рамках предыдущего дз ВМ с именем reddit-app уже существовала
+
+Выполнено:
+Самостоятельные задания:
+- Определите input переменную для приватного ключа,
+использующегося в определении подключения для провижинеров (connection);
+- Определите input переменную для задания зоны в ресурсе
+"yandex_compute_instance" "app". У нее должно быть значение по умолчанию;
+- Отформатируйте все конфигурационные файлы используя команду terraform fmt;
+- Так как в репозиторий не попадет ваш terraform.tfvars, то нужно сделать рядом файл terraform.tfvars.example, в
+котором будут указаны переменные для образца
+
+Задание с **
+- Создайте файл lb.tf и опишите в нем в коде terraform создание HTTP балансировщика
+- Создание инстансов с заданием их количества через параметр ресурса count
