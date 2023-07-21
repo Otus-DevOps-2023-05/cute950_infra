@@ -9,6 +9,3 @@ token            = "token"
 instances_count  = 1
 app_disk_image   = "app_disk_image"
 db_disk_image    = "db_disk_image"
-bucket_name      = "reddit-bucket"
-access_key       = "access_key"
-secret_key       = "secret_key"
