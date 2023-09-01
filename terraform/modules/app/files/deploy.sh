@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "sleep 3m for install updates-1";
+sleep 3m;
 set -e
 APP_DIR=${1:-$HOME}
 sudo apt-get install -y git
