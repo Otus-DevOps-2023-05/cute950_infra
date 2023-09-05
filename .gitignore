@@ -2,6 +2,7 @@
 *.tfstate.*.backup
 *.tfstate.backup
 *.tfvars
+*.retry
 .terraform/
 /packer/variables.json
 .terraform.lock.hcl

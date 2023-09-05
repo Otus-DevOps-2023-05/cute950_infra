@@ -5,12 +5,12 @@ inventory='{
     "children": {
       "app": {
         "hosts": {
-          "appserver": null
+          "158.160.108.169": null
         }
       },
       "db": {
         "hosts": {
-          "51.250.73.164": null
+          "51.250.78.85": null
         }
       }
     }
