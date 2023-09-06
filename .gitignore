@@ -6,3 +6,5 @@
 .terraform/
 /packer/variables.json
 .terraform.lock.hcl
+jdauphant.nginx
+vault.key
