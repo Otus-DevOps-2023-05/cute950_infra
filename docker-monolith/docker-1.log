@@ -1,0 +1,11 @@
+REPOSITORY                  TAG       IMAGE ID       CREATED          SIZE
+tkazymova/ubuntu-tmp-file   latest    c365e839b074   57 seconds ago   56.7MB
+nginx                       latest    97930d6f4eec   6 days ago       192MB
+ubuntu                      18.04     d1a528908992   5 months ago     56.7MB
+hello-world                 latest    b038788ddb22   6 months ago     9.14kB
+
+Задание со *
+$ docker inspect <u_container_id>
+$ docker inspect <u_image_id>
+
+первая команда выводит информацию по контейнеру, а вторая информацию по образу контейнера. контейнер отличается от образа тем, что представляет собой запущенное приложение, в то время как образ - является лишь шаблоном этого контейнера, позволяющим его создать.
