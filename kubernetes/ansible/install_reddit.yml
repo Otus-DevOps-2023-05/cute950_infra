@@ -1,0 +1,20 @@
+---
+- hosts: master
+  tasks:
+    - name: Copy Deployment
+      copy:
+        src: "{{ item }}"
+        dest: "/home/tkazymova/reddit/"
+      with_fileglob:
+        - "../reddit/*.yml"
+
+    - name: Deployments
+      become: yes
+      become_user: tkazymova
+      #shell: "echo $HOME"
+      shell: "kubectl apply -f {{ item }}"
+      with_items:
+        - "$HOME/reddit/mongo-deployment.yml"
+        - "$HOME/reddit/post-deployment.yml"
+        - "$HOME/reddit/comment-deployment.yml"
+        - "$HOME/reddit/ui-deployment.yml"
