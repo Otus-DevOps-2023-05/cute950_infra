@@ -1,0 +1,103 @@
+---
+- hosts: all
+  become: yes
+  #become_user: tkazymova
+  tasks:
+    - name: install APT Transport HTTPS
+      apt:
+        name: apt-transport-https
+        state: present
+        update_cache: true
+
+    - name: add Docker apt-key
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+        state: present
+
+   - name: Add Docker Repository
+     apt_repository:
+       repo: deb https://download.docker.com/linux/tkazymova focal stable
+       state: present
+
+   - name: Install docker and docker-compose
+      apt:
+        name:
+          - docker.io
+          - docker-compose
+
+   - name: Download files cri-dockerd-0.3.1
+     ansible.builtin.get_url:
+       url: https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.1/cri-dockerd-0.3.1.amd64.tgz
+       dest: $HOME/cri-dockerd-0.3.1.amd64.tgz
+
+   - name: Unarchive cri-dockerd-0.3.1
+     ansible.builtin.unarchive:
+       src: $HOME/cri-dockerd-0.3.1.amd64.tgz
+       dest: $HOME
+       remote_src: true
+
+   - name: Move cri-dockerd
+     shell: "mv $HOME/cri-dockerd/cri-dockerd /usr/bin/cri-dockerd"
+
+
+   - name: Download files cri-docker.service
+     ansible.builtin.get_url:
+       url: https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.service
+       dest: $HOME/cri-docker.service
+
+
+   - name: Download files cri-docker.socket
+     ansible.builtin.get_url:
+       url: https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.socket
+       dest: $HOME/cri-docker.socket
+
+   - name: Move cri-docker
+     shell: "mv {{ item }} /etc/systemd/system/"
+     with_items:
+       - $HOME/cri-docker.socket
+       - $HOME/cri-docker.service
+
+   - name: Deamon reload
+     systemd:
+       daemon_reload: true
+
+   - name: Enable cri-docker.service
+     systemd:
+       name: cri-docker.service
+       enabled: true
+
+
+   - name: Enable cri-docker.socket
+     shell: "systemctl enable --now cri-docker.socket"
+
+
+   - name: add Kubernetes apt-key
+     apt_key:
+       url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+       state: present
+
+   - name: add Kubernetes' APT repository
+     apt_repository:
+      repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+      state: present
+      filename: 'kubernetes'
+
+   - name: install kubelet
+     apt:
+       name: kubelet
+       state: present
+       update_cache: true
+
+   - name: install kubeadm
+     apt:
+       name: kubeadm
+       state: present
+
+- hosts: master
+  become: yes
+  tasks:
+   - name: install kubectl
+     apt:
+       name: kubectl
+       state: present
+       force: yes
